@@ -7,6 +7,7 @@ require_relative "plugins/import_url_plugin"
 require_relative "plugins/realpath_plugin"
 require_relative "plugins/ruby_plugin"
 require_relative "plugins/yaml_plugin"
+require_relative "plugins/json_plugin"
 
 Async do
   compiler = Resources::Compiler.new(
@@ -17,6 +18,7 @@ Async do
       RealpathPlugin,
       ImportUrlPlugin,
       RubyPlugin,
+      JSONPlugin,
       YAMLPlugin,
     ]
   )

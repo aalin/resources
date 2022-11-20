@@ -7,6 +7,7 @@ require_relative "plugins/import_url_plugin"
 require_relative "plugins/realpath_plugin"
 require_relative "plugins/ruby_plugin"
 require_relative "plugins/yaml_plugin"
+require_relative "plugins/json_plugin"
 
 class HMRPlugin < Resources::Plugin
   class Factory
@@ -45,6 +46,7 @@ Async do
       ImportUrlPlugin,
       RubyPlugin,
       YAMLPlugin,
+      JSONPlugin,
       HMRPlugin.configure(runtime:)
     ]
   )
