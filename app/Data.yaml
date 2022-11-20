@@ -1,0 +1,6 @@
+foo: "fo"
+bar:
+- 1
+- "2"
+baz:
+  hello: "hello"

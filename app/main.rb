@@ -1,4 +1,5 @@
 Hello = import("./Hello")
+Data = import("./Data.yaml")
 
 hello = Hello.new("Luke Skywalker")
 
