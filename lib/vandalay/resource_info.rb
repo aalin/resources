@@ -1,4 +1,4 @@
-module Resources
+module Vandalay
   class ResourceInfo
     attr_reader :id
     attr_accessor :code

@@ -1,7 +1,7 @@
 require "bundler/setup"
 require "async"
+require "vandalay"
 
-require_relative "resources/compiler"
 require_relative "plugins/resolve_relative_plugin"
 require_relative "plugins/import_url_plugin"
 require_relative "plugins/realpath_plugin"
@@ -9,7 +9,7 @@ require_relative "plugins/ruby_plugin"
 require_relative "plugins/yaml_plugin"
 require_relative "plugins/json_plugin"
 
-class HMRPlugin < Resources::Plugin
+class HMRPlugin < Vandalay::Plugin
   class Factory
     def initialize(options)
       @options = options
@@ -35,9 +35,9 @@ class HMRPlugin < Resources::Plugin
 end
 
 Async do
-  runtime = Resources::Runtime.new({})
+  runtime = Vandalay::Runtime.new({})
 
-  compiler = Resources::Compiler.new(
+  compiler = Vandalay::Compiler.new(
     root: File.join(__dir__, "app"),
     entries: "/main.rb",
     plugins: [

@@ -1,6 +1,6 @@
 require_relative "resource_info"
 
-module Resources
+module Vandalay
   class Runtime
     class ResourceModule < Module
       attr_reader :id
@@ -43,24 +43,24 @@ module Resources
 
     def initialize(resource_infos)
       @resource_infos = resource_infos
-      @resources = {}
+      @vandalay = {}
     end
 
     def marshal_dump =  @resource_infos
     def marshal_load(resource_infos)
       @resource_infos = resource_infos
-      @resources = {}
+      @vandalay = {}
     end
 
     def swap(resource_info)
       id = resource_info.id
       @resource_infos[id] = resource_info
-      @resources.delete(id)
+      @vandalay.delete(id)
       load(id)
     end
 
     def load(id)
-      @resources[id] ||= begin
+      @vandalay[id] ||= begin
         code = @resource_infos.fetch(id).code
         ResourceModule.new(self, id, code)
       end

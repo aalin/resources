@@ -1,4 +1,4 @@
-module Resources
+module Vandalay
   module Assets
     module Generators
       class Base

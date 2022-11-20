@@ -1,4 +1,4 @@
-class ResolveRelativePlugin < Resources::Plugin
+class ResolveRelativePlugin < Vandalay::Plugin
   def resolve_id(source, importer)
     if source.start_with?("./") || source.start_with?("../")
       compiler.resolve_id(

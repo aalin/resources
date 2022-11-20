@@ -1,4 +1,4 @@
-module Resources
+module Vandalay
   class Plugin
     attr_reader :compiler
 

@@ -2,7 +2,7 @@ require "fileutils"
 
 require_relative "base"
 
-module Resources
+module Vandalay
   module Assets
     module Generators
       class CopyFile < Base

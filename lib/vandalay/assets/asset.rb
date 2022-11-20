@@ -1,4 +1,4 @@
-module Resources
+module Vandalay
   module Assets
     class Asset
       attr_reader :dependants

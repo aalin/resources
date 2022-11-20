@@ -1,3 +1,15 @@
+PATH
+  remote: .
+  specs:
+    vandalay (0.1.0)
+      async
+      async-http
+      base58-alphabets
+      brotli
+      parser
+      pry
+      unparser
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -49,13 +61,7 @@ PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
-  async
-  async-http
-  base58-alphabets
-  brotli
-  parser
-  pry
-  unparser
+  vandalay!
 
 BUNDLED WITH
    2.3.25

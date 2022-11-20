@@ -1,7 +1,7 @@
 require "set"
 require "tsort"
 
-module Resources
+module Vandalay
   class Graph
     class Node
       attr :value

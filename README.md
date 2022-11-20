@@ -1,16 +1,18 @@
-# import/export for ruby
+# Vandalay
 
 ## Description
 
-This repo contains some experiments with modules,
-inspired by ES-modules and Rollup.
+This library is an expriement with a module system with import/export.
 
-Plugins are used to resolve paths, load files,
-resolve imports and transform source code.
+Plugins are used to resolve paths, load files, resolve imports and
+transform source code.
 
-`Resources::Compiler#compile` returns a hash of `Resources::ResourceInfo`
-which can be marshaled, and later unmarshaled into `Resources::Runtime`
+`Vandalay::Compiler#compile` returns a hash of `Vandalay::ResourceInfo`
+which can be marshaled, and later unmarshaled into `Vandalay::Runtime`
 to run the same code later without having to transform everything again.
+
+Inspired by [ES-modules](https://tc39.es/ecma262/#sec-modules) and
+[Rollup](https://rollupjs.org/).
 
 ## Usage
 

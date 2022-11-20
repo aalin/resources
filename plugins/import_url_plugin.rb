@@ -1,7 +1,7 @@
 require "digest/sha2"
 require "async/http/internet"
 
-class ImportUrlPlugin < Resources::Plugin
+class ImportUrlPlugin < Vandalay::Plugin
   class Internet < BasicObject
     def initialize
       @internet = ::Async::HTTP::Internet.new

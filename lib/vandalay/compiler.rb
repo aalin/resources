@@ -7,7 +7,7 @@ require_relative "plugin"
 require_relative "graph"
 require_relative "assets"
 
-module Resources
+module Vandalay
   class Compiler
     class ModuleNotFoundError < StandardError
     end
