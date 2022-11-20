@@ -2,7 +2,7 @@ require "yaml"
 require "parser"
 require "unparser"
 
-class YAMLPlugin < Vandalay::Plugin
+class YAMLPlugin < Vandelay::Plugin
   EXTNAME = ".yaml"
 
   def load(id)

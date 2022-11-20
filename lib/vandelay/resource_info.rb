@@ -1,7 +1,7 @@
 # typed: strict
 # frozen_string_literal: true
 
-module Vandalay
+module Vandelay
   class ResourceInfo < T::Struct
     extend T::Sig
 

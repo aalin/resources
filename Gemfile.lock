@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    vandalay (0.0.1)
+    vandelay (0.0.1)
       async
       async-http
       base58-alphabets
@@ -98,7 +98,7 @@ PLATFORMS
 DEPENDENCIES
   sorbet
   tapioca
-  vandalay!
+  vandelay!
 
 BUNDLED WITH
    2.3.25

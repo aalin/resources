@@ -1,4 +1,4 @@
-class RealpathPlugin < Vandalay::Plugin
+class RealpathPlugin < Vandelay::Plugin
   def resolve_id(source, importer)
     absolute_path = compiler.absolute_path(source)
 

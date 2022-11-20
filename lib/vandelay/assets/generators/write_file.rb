@@ -5,7 +5,7 @@ require "brotli"
 
 require_relative "base"
 
-module Vandalay
+module Vandelay
   module Assets
     module Generators
       class WriteFile < Base

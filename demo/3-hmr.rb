@@ -1,6 +1,6 @@
 require "bundler/setup"
 require "async"
-require "vandalay"
+require "vandelay"
 
 require_relative "plugins/resolve_relative_plugin"
 require_relative "plugins/import_url_plugin"
@@ -9,7 +9,7 @@ require_relative "plugins/ruby_plugin"
 require_relative "plugins/yaml_plugin"
 require_relative "plugins/json_plugin"
 
-class HMRPlugin < Vandalay::Plugin
+class HMRPlugin < Vandelay::Plugin
   class Factory
     def initialize(**options)
       @options = options
@@ -37,9 +37,9 @@ end
 Async do
   on_swap = Async::Notification.new
 
-  runtime = Vandalay::Runtime.new({})
+  runtime = Vandelay::Runtime.new({})
 
-  compiler = Vandalay::Compiler.new(
+  compiler = Vandelay::Compiler.new(
     root: File.join(__dir__, "app"),
     entries: "/main.rb",
     plugins: [

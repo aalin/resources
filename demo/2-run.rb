@@ -1,9 +1,9 @@
 require "bundler/setup"
 require "async"
-require "vandalay"
+require "vandelay"
 
 Async do
-  runtime = Vandalay::Runtime.new(
+  runtime = Vandelay::Runtime.new(
     Marshal.load(File.read("bundle.marshal"))
   )
 

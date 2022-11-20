@@ -6,7 +6,7 @@ require_relative "assets/generators/base"
 require_relative "assets/generators/copy_file"
 require_relative "assets/generators/write_file"
 
-module Vandalay
+module Vandelay
   module Assets
   end
 end

@@ -4,7 +4,7 @@
 require "set"
 require "tsort"
 
-module Vandalay
+module Vandelay
   class Graph
     extend T::Sig
 

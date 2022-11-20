@@ -1,7 +1,7 @@
 # typed: true
 # frozen_string_literal: true
 
-module Vandalay
+module Vandelay
   module Assets
     class Asset
       extend T::Sig

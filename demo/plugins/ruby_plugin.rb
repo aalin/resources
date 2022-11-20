@@ -1,7 +1,7 @@
 require "pry"
 require 'parser/current'
 
-class RubyPlugin < Vandalay::Plugin
+class RubyPlugin < Vandelay::Plugin
   EXTNAME = ".rb"
 
   class TransformImport < Parser::TreeRewriter

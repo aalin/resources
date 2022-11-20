@@ -3,7 +3,7 @@
 
 require_relative "resource_info"
 
-module Vandalay
+module Vandelay
   class Runtime
     class ResourceModule < Module
       extend T::Sig

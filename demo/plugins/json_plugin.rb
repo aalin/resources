@@ -2,7 +2,7 @@ require "json"
 require "parser"
 require "unparser"
 
-class JSONPlugin < Vandalay::Plugin
+class JSONPlugin < Vandelay::Plugin
   EXTNAME = ".json"
 
   def load(id)
