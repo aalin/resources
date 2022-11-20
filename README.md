@@ -16,6 +16,8 @@ Inspired by [ES-modules](https://tc39.es/ecma262/#sec-modules) and
 
 ## Usage
 
+### Default exports
+
 ```ruby
 class Foo
   def hello

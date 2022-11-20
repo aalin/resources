@@ -1,5 +1,7 @@
+# typed: strict
 # frozen_string_literal: true
 
+require "sorbet-runtime"
 require_relative "vandalay/version"
 require_relative "vandalay/compiler"
 

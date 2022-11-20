@@ -1,5 +1,5 @@
-require "fileutils"
-require "brotli"
+# typed: strict
+# frozen_string_literal: true
 
 require_relative "assets/asset"
 require_relative "assets/generators/base"

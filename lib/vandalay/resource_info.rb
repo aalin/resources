@@ -1,23 +1,29 @@
+# typed: strict
+# frozen_string_literal: true
+
 module Vandalay
-  class ResourceInfo
-    attr_reader :id
-    attr_accessor :code
-    attr_accessor :ast
-    attr_reader :incoming
-    attr_reader :outgoing
+  class ResourceInfo < T::Struct
+    extend T::Sig
 
-    def initialize(id)
-      @id = id
-      @incoming = Set.new
-      @outgoing = Set.new
+    MarshalFormat = T.type_alias do
+      [String, String, T::Set[String], T::Set[String]]
     end
 
+    const :id, String
+    const :incoming, T::Set[String], default: Set.new
+    const :outgoing, T::Set[String], default: Set.new
+
+    prop :code, T.nilable(String)
+    prop :ast, T.untyped, default: nil
+
+    sig {returns(MarshalFormat)}
     def marshal_dump
-      [@id, @code]
+      [@id, @code.to_s, @incoming, @outgoing]
     end
 
+    sig {params(a: MarshalFormat).void}
     def marshal_load(a)
-      @id, @code = a
+      @id, @code, @incoming, @outgoing = a
     end
   end
 end

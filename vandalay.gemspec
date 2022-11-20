@@ -37,5 +37,6 @@ Gem::Specification.new do |spec|
   spec.add_dependency "brotli"
   spec.add_dependency "parser"
   spec.add_dependency "pry"
+  spec.add_dependency "sorbet-runtime"
   spec.add_dependency "unparser"
 end

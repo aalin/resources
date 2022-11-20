@@ -11,30 +11,32 @@ require_relative "plugins/json_plugin"
 
 class HMRPlugin < Vandalay::Plugin
   class Factory
-    def initialize(options)
+    def initialize(**options)
       @options = options
     end
 
     def new(compiler)
-      HMRPlugin.new(compiler, @options)
+      HMRPlugin.new(compiler, **@options)
     end
   end
 
-  def self.configure(options)
-    Factory.new(options)
+  def self.configure(**options)
+    Factory.new(**options)
   end
 
-  def initialize(compiler, options)
+  def initialize(compiler, runtime:)
     super(compiler)
-    @options = options
+    @runtime = runtime
   end
 
   def resource_parsed(resource_info)
-    @options[:runtime].swap(resource_info)
+    @runtime.swap(resource_info)
   end
 end
 
 Async do
+  on_swap = Async::Notification.new
+
   runtime = Vandalay::Runtime.new({})
 
   compiler = Vandalay::Compiler.new(

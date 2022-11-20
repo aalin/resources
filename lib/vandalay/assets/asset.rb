@@ -1,9 +1,17 @@
+# typed: true
+# frozen_string_literal: true
+
 module Vandalay
   module Assets
     class Asset
+      extend T::Sig
+
+      sig {returns(T::Set[String])}
       attr_reader :dependants
+      sig {returns(String)}
       attr_reader :filename
 
+      sig {params(filename: String, generator: Generators::Base).void}
       def initialize(filename, generator)
         @dependants = Set.new
         @filename = filename

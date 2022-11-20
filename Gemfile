@@ -4,3 +4,8 @@ source "https://rubygems.org"
 
 # Specify your gem's dependencies in vandalay.gemspec
 gemspec
+
+group :development do
+  gem 'sorbet'
+  gem 'tapioca', require: false
+end

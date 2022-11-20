@@ -1,4 +1,7 @@
-require "digest"
+# typed: true
+# frozen_string_literal: true
+
+require "digest/sha2"
 require "base58-alphabets"
 
 require_relative "runtime"
@@ -21,16 +24,15 @@ module Vandalay
 
       @graph = Graph.new
       @assets = {}
-      @resource_infos = {}
     end
 
     def get_resource_info(id)
-      @resource_infos[id]
+      @graph.get_node(id)
     end
 
     def compile
       @entries.each { load(_1) }
-      @resource_infos
+      @graph.nodes
     end
 
     def read(id, encoding: 'utf-8')
@@ -80,7 +82,7 @@ module Vandalay
         raise "#{id} is importing itself"
       end
 
-      info = get_or_create_resource_info(id)
+      info = @graph.add_node(id)
 
       unless info.code
         puts "\e[32mLoading #{id}\e[0m"
@@ -96,10 +98,8 @@ module Vandalay
 
       resource_parsed(info)
 
-      @graph.add_node(id, info)
-
       if importer
-        @graph.add_node(importer, get_or_create_resource_info(importer))
+        @graph.add_node(importer)
         @graph.add_dependency(importer, id)
       end
 
@@ -107,7 +107,6 @@ module Vandalay
     end
 
     def unload(id)
-      @resource_infos.delete(id)
       @graph.delete_node(id)
       @assets.values.each { _1.dependants.delete(id) }
     end
@@ -123,10 +122,6 @@ module Vandalay
     end
 
     private
-
-    def get_or_create_resource_info(id)
-      @resource_infos[id] ||= ResourceInfo.new(id)
-    end
 
     def load_code(id)
       @plugins.each do |plugin|
