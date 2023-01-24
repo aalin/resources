@@ -1,5 +1,5 @@
 Foobar = import("./foobar")
-Foo, Bar, BAZ = import("./multi", :Foo, :Bar, :BAZ)
+Multi = import("./multi")
 
 class Hello
   def initialize(name)
@@ -12,4 +12,4 @@ class Hello
   end
 end
 
-export default: Hello
+Export = Hello

@@ -6,6 +6,8 @@ source "https://rubygems.org"
 gemspec
 
 group :development do
-  gem 'sorbet'
-  gem 'tapioca', require: false
+  gem "sorbet"
+  gem "tapioca", require: false
+  gem "pry"
+  gem "rszr"
 end

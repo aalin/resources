@@ -59,6 +59,7 @@ GEM
       parser (>= 2.6.4.0)
       sorbet-runtime (>= 0.5.9204)
       unparser
+    rszr (1.3.0)
     sorbet (0.5.10563)
       sorbet-static (= 0.5.10563)
     sorbet-runtime (0.5.10563)
@@ -96,6 +97,8 @@ PLATFORMS
   x86_64-darwin-20
 
 DEPENDENCIES
+  pry
+  rszr
   sorbet
   tapioca
   vandelay!

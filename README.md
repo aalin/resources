@@ -16,7 +16,7 @@ Inspired by [ES-modules](https://tc39.es/ecma262/#sec-modules) and
 
 ## Usage
 
-### Default exports
+### Export
 
 ```ruby
 class Foo
@@ -25,7 +25,7 @@ class Foo
   end
 end
 
-export default: Foo
+Export = Foo
 ```
 
 This class can be imported like this:
@@ -34,43 +34,25 @@ This class can be imported like this:
 Foo = import("./foo.rb")
 ```
 
-### Named exports
+### Multiple exports
 
 ```ruby
-class Foo
+module Export
+  class Foo
+  end
+
+  class Bar
+  end
+
+  BAZ = "baz"
 end
-
-class Bar
-end
-
-BAZ = "baz"
-
-export Foo
-export Bar, BAZ:
-```
-
-is the same as:
-
-```ruby
-class Foo
-end
-
-class Bar
-end
-
-BAZ = "baz"
-
-export(
-  Foo:,
-  Bar:,
-  BAZ:,
-)
 ```
 
 and can be imported like this:
 
 ```ruby
-Foo, Bar, BAZ = import("module.rb", :Foo, :Bar, :BAZ)
+MyModule = import("module.rb")
+MyModule::Foo
 ```
 
 ## Notes

@@ -5,54 +5,47 @@ require_relative "resource_info"
 
 module Vandelay
   class Runtime
+    class UndefinedExport < BasicObject
+      class Error < ::StandardError
+      end
+
+      extend ::T::Sig
+
+      sig {params(id: String).void}
+      def initialize(id)
+        @id = ::T.let(id, String)
+      end
+
+      sig {params(args: T.untyped).void}
+      def method_missing(*args)
+        ::Kernel.raise(Error, "#{@id} does not have an export")
+      end
+    end
+
     class ResourceModule < Module
       extend T::Sig
 
       sig { returns(String) }
       attr_reader :id
-      sig { returns(T::Hash[Symbol, T.untyped]) }
-      attr_reader :exports
 
       sig { params(runtime: Runtime, id: String, code: String).void }
       def initialize(runtime, id, code)
         @id = id
         @runtime = runtime
-        @exports = T.let({}, T::Hash[Symbol, T.untyped])
-        instance_eval(code)
-      end
-
-      sig { params(args: T.any(Class, Module), kwargs: T.untyped).void }
-      def export(*args, **kwargs)
-        args.each do |arg|
-          exports[arg.name.to_s.split("::").last.to_s.to_sym] = arg
-        end
-
-        kwargs.each { |key, arg| exports[key] = arg }
+        module_eval(code, id, 1)
       end
 
       sig do
-        params(names: Symbol).returns(T.any(T.untyped, T::Array[T.untyped]))
+        params(id: String).returns(T.untyped)
       end
-      def get_exports(*names)
-        case names
-        in []
-          exports.fetch(:default) do
-            raise "Could not find a default export in #{@id}"
-          end
-        in [name]
-          exports.fetch(name)
+      def import(id)
+        mod = T.unsafe(@runtime.load(id))
+        if mod.const_defined?(:Export)
+          mod.const_get(:Export)
         else
-          T.unsafe(exports).values_at(*names)
+          $stderr.puts "\e[33m#{}\e[0m"
+          nil
         end
-      end
-
-      sig do
-        params(id: String, names: Symbol).returns(
-          T.any(T.untyped, T::Array[T.untyped])
-        )
-      end
-      def import(id, *names)
-        T.unsafe(@runtime.load(id)).get_exports(*names)
       end
     end
 

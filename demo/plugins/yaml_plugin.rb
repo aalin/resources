@@ -21,7 +21,7 @@ class YAMLPlugin < Vandelay::Plugin
     unparsed = Unparser.unparse(get_resource_info(id).ast)
 
     <<~RUBY
-      export default: #{unparsed}
+      Export = #{unparsed}
     RUBY
   end
 end

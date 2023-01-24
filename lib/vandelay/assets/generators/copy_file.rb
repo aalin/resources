@@ -16,9 +16,8 @@ module Vandelay
 
         sig { override.params(path: String).void }
         def call(path)
-          if FileUtils.copy_file(@source_path, path) unless File.exist?(path)
-            return
-          end
+          return if File.exist?(path)
+          FileUtils.copy_file(@source_path, path)
         end
       end
     end
