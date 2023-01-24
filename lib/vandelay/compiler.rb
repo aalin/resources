@@ -35,7 +35,7 @@ module Vandelay
       @graph.nodes
     end
 
-    def read(id, encoding: 'utf-8')
+    def read(id, encoding: "utf-8")
       File.read(absolute_path(id), encoding:)
     rescue Errno::ENOENT
       raise ModuleNotFoundError, "Could not find module #{id}"
@@ -67,11 +67,9 @@ module Vandelay
             puts "\e[33mUnloading #{dep}\e[0m"
             unload(dep)
 
-            if @entries.include?(dep)
-              load(dep)
-            end
+            load(dep) if @entries.include?(dep)
           end
-      end
+        end
     end
 
     def load(source, importer = nil)
@@ -88,7 +86,7 @@ module Vandelay
         puts "\e[32mLoading #{id}\e[0m"
 
         case load_code(id)
-        in code:, ast:
+        in { code:, ast: }
           info.ast = ast
           info.code = transform(code, id)
         in String => code
@@ -144,9 +142,7 @@ module Vandelay
     end
 
     def resource_parsed(resource_info)
-      @plugins.each do |plugin|
-        plugin.resource_parsed(resource_info)
-      end
+      @plugins.each { |plugin| plugin.resource_parsed(resource_info) }
 
       resource_info
     end

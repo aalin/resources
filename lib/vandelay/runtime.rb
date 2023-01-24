@@ -8,12 +8,12 @@ module Vandelay
     class ResourceModule < Module
       extend T::Sig
 
-      sig {returns(String)}
+      sig { returns(String) }
       attr_reader :id
-      sig {returns(T::Hash[Symbol, T.untyped])}
+      sig { returns(T::Hash[Symbol, T.untyped]) }
       attr_reader :exports
 
-      sig {params(runtime: Runtime, id: String, code: String).void}
+      sig { params(runtime: Runtime, id: String, code: String).void }
       def initialize(runtime, id, code)
         @id = id
         @runtime = runtime
@@ -21,18 +21,18 @@ module Vandelay
         instance_eval(code)
       end
 
-      sig {params(args: T.any(Class, Module), kwargs: T.untyped).void}
+      sig { params(args: T.any(Class, Module), kwargs: T.untyped).void }
       def export(*args, **kwargs)
         args.each do |arg|
           exports[arg.name.to_s.split("::").last.to_s.to_sym] = arg
         end
 
-        kwargs.each do |key, arg|
-          exports[key] = arg
-        end
+        kwargs.each { |key, arg| exports[key] = arg }
       end
 
-      sig {params(names: Symbol).returns(T.any(T.untyped, T::Array[T.untyped]))}
+      sig do
+        params(names: Symbol).returns(T.any(T.untyped, T::Array[T.untyped]))
+      end
       def get_exports(*names)
         case names
         in []
@@ -46,7 +46,11 @@ module Vandelay
         end
       end
 
-      sig {params(id: String, names: Symbol).returns(T.any(T.untyped, T::Array[T.untyped]))}
+      sig do
+        params(id: String, names: Symbol).returns(
+          T.any(T.untyped, T::Array[T.untyped])
+        )
+      end
       def import(id, *names)
         T.unsafe(@runtime.load(id)).get_exports(*names)
       end
@@ -54,20 +58,20 @@ module Vandelay
 
     extend T::Sig
 
-    sig {params(resource_infos: T::Hash[String, ResourceInfo]).void}
+    sig { params(resource_infos: T::Hash[String, ResourceInfo]).void }
     def initialize(resource_infos)
       @resource_infos = resource_infos
       @resources = T.let({}, T::Hash[String, ResourceModule])
     end
 
-    sig {params(resource_info: ResourceInfo).void}
+    sig { params(resource_info: ResourceInfo).void }
     def swap(resource_info)
       @resource_infos[resource_info.id] = resource_info
       @resources.delete(resource_info.id)
       load(resource_info.id)
     end
 
-    sig {params(id: String).returns(ResourceModule)}
+    sig { params(id: String).returns(ResourceModule) }
     def load(id)
       @resources[id] ||= begin
         code = @resource_infos.fetch(id).code.to_s

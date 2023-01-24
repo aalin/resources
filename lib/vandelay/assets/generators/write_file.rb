@@ -11,24 +11,22 @@ module Vandelay
       class WriteFile < Base
         extend T::Sig
 
-        sig {params(contents: String, compress: T::Boolean).void}
+        sig { params(contents: String, compress: T::Boolean).void }
         def initialize(contents:, compress:)
           @contents = contents
           @compress = compress
         end
 
-        sig {override.params(path: String).void}
+        sig { override.params(path: String).void }
         def call(path)
           write_file(path, @contents)
 
-          if @compress
-            write_file(path + ".br", Brotli.deflate(@contents))
-          end
+          write_file(path + ".br", Brotli.deflate(@contents)) if @compress
         end
 
         private
 
-        sig {params(path: String, content: String).void}
+        sig { params(path: String, content: String).void }
         def write_file(path, content)
           return if File.exist?(path)
           File.write(path, content)

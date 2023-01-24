@@ -5,9 +5,8 @@ module Vandelay
   class ResourceInfo < T::Struct
     extend T::Sig
 
-    MarshalFormat = T.type_alias do
-      [String, String, T::Set[String], T::Set[String]]
-    end
+    MarshalFormat =
+      T.type_alias { [String, String, T::Set[String], T::Set[String]] }
 
     const :id, String
     const :incoming, T::Set[String], default: Set.new
@@ -16,12 +15,12 @@ module Vandelay
     prop :code, T.nilable(String)
     prop :ast, T.untyped, default: nil
 
-    sig {returns(MarshalFormat)}
+    sig { returns(MarshalFormat) }
     def marshal_dump
       [@id, @code.to_s, @incoming, @outgoing]
     end
 
-    sig {params(a: MarshalFormat).void}
+    sig { params(a: MarshalFormat).void }
     def marshal_load(a)
       @id, @code, @incoming, @outgoing = a
     end
